@@ -55,9 +55,9 @@ public class CET {
 
     private MessageChain getPictures(File files,Contact contact) throws IOException {
         MessageChainBuilder messageChainBuilder = new MessageChainBuilder();
-        File[] file = Objects.requireNonNull(files.listFiles())[count].listFiles();
-        for (int i = 0; i < Objects.requireNonNull(file).length; i++) {
-            ExternalResource er = ExternalResource.create(file[i]);
+        File file = Objects.requireNonNull(files.listFiles())[count];
+        for (int i = 0; i < Objects.requireNonNull(Objects.requireNonNull(file).listFiles()).length; i++) {
+            ExternalResource er = ExternalResource.create(new File(file.getPath()+"/"+(i+10)+".jpg"));
             messageChainBuilder = messageChainBuilder.append(contact.uploadImage(er));
             er.close();
         }
